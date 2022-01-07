@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>条状加载动画</title>
+    <style>
+      .loading {
+        margin: 20px;
+        height: 20px;
+        width: 200px;
+        background-color: #00a1ff;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        animation: load 2s infinite;
+        -webkit-animation: load 2s infinite;
+      }
+      @keyframes load {
+        from {
+          width: 0;
+        }
+        to {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading"></div>
+  </body>
+</html>

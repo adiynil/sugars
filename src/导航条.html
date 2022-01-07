@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>导航条</title>
+    <style>
+      .main {
+        height: 50px;
+        background-color: #c82519;
+        color: #fafafa;
+        line-height: 50px;
+        text-align: center;
+      }
+      .main .left {
+        float: left;
+        height: 100%;
+        width: 60px;
+      }
+      .main .center {
+        float: left;
+        height: 100%;
+        width: calc(100% - 120px);
+      }
+      .main .center input {
+        width: 100%;
+        border: none;
+        height: 35px;
+      }
+      .main .right {
+        float: left;
+        height: 100%;
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="left">
+        <label>菜单</label>
+      </div>
+      <div class="center">
+        <input type="text" />
+      </div>
+      <div class="right">
+        <label>登录</label>
+      </div>
+    </div>
+  </body>
+</html>

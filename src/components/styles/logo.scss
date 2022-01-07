@@ -1,0 +1,20 @@
+@import url('https://fonts.font.im/css?family=Comfortaa:700');
+
+.mian-logo {
+  float: left;
+  color: #fafafa;
+  margin: 0 30px 0 0;
+  font-family: Comfortaa, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 30px;
+  line-height: 64px;
+  &::first-letter {
+    background: #00a1ff;
+    padding: 0 7px;
+    margin-right: 2px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+  }
+}
