@@ -3,10 +3,10 @@
  * @param {*}
  * @return {*}
  */
-export function createUniqueString() {
+function createUniqueString() {
   const timestamp = +new Date() + ''
   const randomNum = parseInt((1 + Math.random()) * 65536 + '')
-  return (+(randomNum + timestamp)).toString(32)
+  return (+(randomNum + timestamp)).toString(32).toUpperCase()
 }
 
 /**
@@ -14,18 +14,18 @@ export function createUniqueString() {
  * @param {*}
  * @return {*}
  */
-export function createUniqueNumber() {
+function createUniqueNumber() {
   const timestamp = +new Date()
   const randomNum = Math.random() * Math.random() * timestamp
   return Math.floor(randomNum)
 }
 /**
- * @description:
+ * @description: （浏览器运行）切换元素的指定class
  * @param {HTMLElement} element
  * @param {string} className
  * @return {*}
  */
-export function toggleClass(element: HTMLElement, className: string) {
+function toggleClass(element, className) {
   if (!element || !className) {
     return
   }
@@ -42,16 +42,23 @@ export function toggleClass(element: HTMLElement, className: string) {
 }
 
 /**
- * @description:
+ * @description: （浏览器运行）设置页面标签名字
  * @param {string} t document title
  * @return {*}
  */
-export function setTitle(t: string) {
+function setTitle(t) {
   document.title = t
 }
 
-export function openWindow(url: string, title: string, w: number, h: number) {
-  // Fixes dual-screen position                            Most browsers       Firefox
+/**
+ * @description: （浏览器运行）打开指定链接窗口
+ * @param {*} url
+ * @param {*} title
+ * @param {*} w
+ * @param {*} h
+ * @return {*}
+ */
+function openWindow(url, title, w, h) {
   const dualScreenLeft = window.screenLeft || screen.left
   const dualScreenTop = window.screenTop || screen.top
 
@@ -81,14 +88,14 @@ export function openWindow(url: string, title: string, w: number, h: number) {
 }
 
 /**
- * @description:
+ * @description: 生成唯一uuid
  * @param {number} length
  * @param {string} chars
  * @return {*}
  */
-export function uuid(
-  length: number = 8,
-  chars: string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+function uuid(
+  length = 8,
+  chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 ) {
   var result = ''
   for (var i = length; i > 0; --i)
@@ -97,11 +104,11 @@ export function uuid(
 }
 
 /**
- * @description: close current window
+ * @description: （浏览器运行）关闭当前窗口
  * @param {*}
  * @return {*}
  */
-export function closeWindow() {
+function closeWindow() {
   var userAgent = navigator.userAgent
   if (
     userAgent.indexOf('Firefox') !== -1 ||
@@ -122,12 +129,8 @@ export function closeWindow() {
  * @param {*} filter
  * @return {*}
  */
-export function flatTree(
-  source: Array<any>,
-  children = 'children',
-  filter = (i: any) => true
-) {
-  let res: Array<any> = []
+function flatTree(source, children = 'children', filter = i => true) {
+  let res = []
   source.forEach(el => {
     if (filter(el)) {
       res.push(el)
@@ -148,49 +151,39 @@ export function flatTree(
  * @param {*} children
  * @return {*}
  */
-export function treeData(
-  source: Array<any>,
+function treeData(
+  source,
   id = 'id',
   parentId = 'parentId',
   children = 'children'
 ) {
   let cloneData = JSON.parse(JSON.stringify(source))
-  return cloneData.filter((father: any) => {
-    let branchArr = cloneData.filter(
-      (child: any) => father[id] == child[parentId]
-    )
+  return cloneData.filter(father => {
+    let branchArr = cloneData.filter(child => father[id] == child[parentId])
     branchArr.length > 0 && (father[children] = branchArr)
     return father[parentId] == '0'
   })
 }
 
-/**
- * @description: File对象转为base64格式
- * @param {File} file
- * @return {*}
- */
-export function readFileAsBase64(file: File) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    let fileResult = ''
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-      fileResult = reader.result as string
-    }
-    reader.onerror = error => {
-      reject(error)
-    }
-    reader.onloadend = () => {
-      resolve(fileResult)
-    }
-  })
+export function myDebounce(func, delay = 800) {
+  let timer = null
+  return function (...args) {
+    const _this = this
+    timer && clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(_this, args)
+    }, delay)
+  }
 }
 
-/**
- * @description: 获取文件对象的本地预览链接（仅限浏览器本地预览）
- * @param {File} file
- * @return {*}
- */
-export function getLocalPreview(file: File) {
-  return URL.createObjectURL(file)
+export function myThrottle(func, delay = 1000) {
+  let timer = null
+  return function (...args) {
+    const _this = this
+    if (timer) return
+    timer = setTimeout(() => {
+      func.apply(_this, args)
+      timer = null
+    }, delay)
+  }
 }
